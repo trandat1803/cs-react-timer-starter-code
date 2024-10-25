@@ -9,13 +9,18 @@ const useTimer = (ini = 0) => {
   const refInterval = useRef(0);
 
   const startTimer = () => {
-    if(!isStart.current) {
+    active.current.disabled = true;
+    isStart.current = true;
+    /*if(!isStart.current) {
       refInterval.current =setInterval(() => {
         setTime((time) => time + 1);
+      }, 1000);*/
+      refInterval.current = setInterval(() => {
+        if (isStart.current) {
+          setTime((time) => time + 1);
+        }
       }, 1000);
-      isStart.current = true;  //update the ref to indicate the timer is running.
-    active.current.disabled = true;
-  };
+  //update the ref to indicate the timer is running.
 }
   const stopTimer = () => {
     clearInterval(refInterval.current);
